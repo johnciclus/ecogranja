@@ -1,0 +1,19 @@
+<% if flash[:notice] %>
+<div id="notice">
+	<p> <b>Noticia: </b><%= flash[:notice].html_safe %></p>
+</div>  
+<% end %>
+
+<h3><span></span> Nueva coordenada</h3>
+<br/>
+<div id="coodinate" class="center">
+	<%= render 'form' %>
+</div>
+
+<div class="separator"></div>
+
+<h3><span></span> Listado de coordenadas</h3>
+<br/>
+<div id="coordinates">
+	<%= render :partial => "coordinates", :locals => {:mode => 'admin'} %>
+</div>

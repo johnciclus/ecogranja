@@ -1,0 +1,76 @@
+/* Formularios */
+form .field{
+	padding: 5px 0px;
+}
+form .field input{
+	width: 30%;
+}
+form .field textarea{
+	width: 100%;
+}
+form .cell{
+	display: inline-block;
+	padding: 3px;
+}
+form .cell input{
+	width: 120px;
+}
+form fieldset{
+	width: 400px;
+	margin: 5px 0px;
+	padding: 10px;
+	border: 1px solid #ddb473;
+}
+
+/* Formulario autentificación*/
+
+#login{
+	position: relative;
+	float: right;
+	margin: 7px;
+	padding: 5px;
+	
+	background-color: rgba(240, 240, 240, 0.5);
+	border: 1px solid #70B500;
+}
+#login #left{
+	display: inline-block;
+	padding: 0px 5px;
+	float: left;
+}
+#login #right{
+	display: inline-block;
+	padding: 0px 5px;
+	float: right;
+}
+#login .links{
+	padding: 3px;
+	margin: 5px;
+	background-color: rgba(112, 181, 0, 0.66);
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* ToolTip */
+.tooltip {
+    background-color:#000;
+    border:1px solid #fff;
+    padding:10px 15px;
+    width:200px;
+    display:block;
+    color:#fff;
+    text-align:left;
+    font-size:12px;
+ 
+    /* outline radius for mozilla/firefox only */
+    -moz-box-shadow:0 0 10px #000;
+    -webkit-box-shadow:0 0 10px #000;
+    box-shadow:0 0 10px #000;
+}
+
+/* Tablas */
+table a{
+	color: #333;
+}
+

@@ -1,0 +1,69 @@
+#simulation{
+	position: relative;
+	width: 100%;
+	height: 600px;
+	margin: 10px;
+}
+#control_simulations{
+	position: relative;
+	width: 190px;
+	height: 100%;
+	float: left;
+	overflow:auto;
+}
+#cont_simulations{
+	position: relative;
+	width:  750px;
+	height: 100%;
+	float: right;
+}
+.control_cont{
+	padding: 5px;	
+}
+.campo {
+	display: block; 
+	margin: 10px 5px;
+}
+
+.campo label {
+	display: inline; 
+	width: 160px; 
+	float: left; 
+	font-weight: bold;
+	color: #008EC7;
+}
+.campo input[type=text] {
+	display: inline;
+	width: 160px; 
+	border: 1px solid #DDB473;
+	background: #FFF; 
+	color: #333;
+}
+
+#viewer_simulations_container{
+	position: relative;
+	width:  750px;
+	height: 420px;
+	float: right;
+	overflow:auto;
+}
+#viewer_simulations{
+	height: 400px;
+	min-width: 400px;
+}
+
+#control_temporal{
+	position: relative;
+	width:  750px;
+	height: 100px;
+}
+#control_temporal fieldset{
+	width: 480px;
+	margin-left: 110px;
+	padding: 10px;
+	border: 1px solid #ddb473;
+}
+#control_temporal .cell{
+	display: inline-block;
+	padding: 3px;
+}

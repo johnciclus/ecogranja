@@ -1,0 +1,23 @@
+<table id="tablaPerfiles">
+<thead>
+	<tr>
+	  <th>Nombre</th>
+	  <th>Permisos</th>
+	  <th>Editar</th>
+	  <th>Eliminar</th>
+	</tr>
+</thead>
+<tbody>	
+	<% @profiles.each do |profile| %>
+	<tr>
+	  <td><b><%= profile.name %></b></td>
+	  <td>	 <%= profile.permissions %></td>
+	  <td>	 <%= link_to 'Editar', edit_profile_path(profile), :method => "get", :remote => true, :class => "button" %></td>
+	  <td>	 <%= button_to "Eliminar", profile, :method => :delete, :remote => true, :class => "button" %></td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<br />
+<%= link_to 'Nuevo perfil', { :controller => "profiles", :action => "index"}, :class => "button" %>

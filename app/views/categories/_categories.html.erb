@@ -1,0 +1,56 @@
+<%unless defined? mode
+	mode = 'normal'
+  end %>
+<table id="tablaCategorias">
+<thead>
+	<tr>
+	  <th>Nombre</th>
+	  <th>Descripción</th>
+	  <% if mode.eql? 'admin' %>
+		  <th>Editar</th>
+		  <th>Eliminar</th>
+	  <% end %>
+	</tr>
+</thead>
+<tbody>
+	<%if @categories.empty? %>
+		<tr>
+			<td colspan="4"><h3> No se encontraron registros.</h3></td>
+		</tr>
+	<%end%>
+	
+	<% @categories.each do |category| %>
+	<tr>
+	  <td><b><%= category.name %></b></td>
+	  <td><%= category.description %></td>
+	  <% if mode.eql? 'admin' %>
+		  <td><%= link_to 'Editar', edit_category_path(category), :class => "button" %></td>
+		  <td><%= button_to "Eliminar", category, :method => :delete %></td>
+	  <% end %>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+ 
+<br />
+<% if mode.eql? 'admin' %>
+	<%= link_to 'Nueva categoría', { :controller => "categories", :action => "index"}, :class => "button" %>
+<% end %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.button").button();
+        
+        <%if @categories.any? %>
+        $("#tablaCategorias").dataTable({
+        	"bJQueryUI": true,
+        	"iDisplayLength": 4,
+			"sPaginationType": "full_numbers",
+			"sScrollX": "940px",
+        	"bScrollCollapse": true,
+			"oLanguage": {
+			    "sUrl": "/assets/jquery/dataTables.spanish"
+			}
+        });
+        <% end %>
+    });
+</script> 

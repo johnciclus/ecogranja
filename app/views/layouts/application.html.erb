@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="es" xml:lang="es">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <meta name="description" content="EcoGranja, Ambiente para el aprendizaje y toma de decisiones en Granjas Agropecuarias.">
+  <meta name="keywords" content="granjas agropecuarias, modelado y simulación de sistemas agricolas y pecuarios">
+  <meta name="author" content="John Garavito Suárez">
+  <title>EcoGranja</title>
+  <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+  <!--<link href='http://fonts.googleapis.com/css?family=Merienda One' rel='stylesheet' type='text/css' />-->
+  <%= stylesheet_link_tag "custom-theme/jquery-ui-1.8.23.custom" %>
+  <%= stylesheet_link_tag "dataTables/css/jquery.dataTables_themeroller" %>
+  <%= stylesheet_link_tag "base", :media => "all" %>
+  <%= stylesheet_link_tag "formularios", :media => "all" %>
+  <%= stylesheet_link_tag "visgeografica", :media => "all" %>
+  <%= stylesheet_link_tag "simulator", :media => "all" %>
+  <!--<%= stylesheet_link_tag "highlight", :media => "all" %>-->
+  <!--<%= javascript_include_tag "http://code.jquery.com/jquery.min.js" %> -->
+  <%= javascript_include_tag "jquery-1.8.2.min" %>
+  <%= javascript_include_tag "rails" %>
+  <%= javascript_include_tag "jquery/jquery.dataTables.spanish" %>
+  <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
+  <!--<%= javascript_include_tag "jquery/jquery-ui-1.8.23.custom.min" %>-->
+  <!--<%= javascript_include_tag "jquery/jquery.dataTables.min" %>-->
+  <!--<%= javascript_include_tag "jquery/jquery.tools.min" %>-->
+  <!--<%= javascript_include_tag "ckeditor/ckeditor"  %>-->
+  <!--<%= javascript_include_tag "ckeditor/adapters/jquery" %>-->  
+  
+  <!--<%= javascript_include_tag 'poo' %>-->
+  <!--<%= javascript_include_tag 'mathlib-min' %>-->
+  <!--<%= javascript_include_tag 'k3d-min' %>-->
+  <!--<%= javascript_include_tag 'visualizador/viewer' %>-->
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div id="topbg"></div>
+<div id="main">
+	<div id="header">
+			<div id="hdr-box1" class="box"><a class="secuencia" href="/">Investiga</a></div>
+			<div id="hdr-box2" class="box"><a class="secuencia" href="/">Aprende</a></div>
+			<div id="hdr-box3" class="box"><a class="secuencia" href="/">Diviertete</a></div>
+			<div id="hdr-box4" class="box"><a class="secuencia" href="/">Arriesgate</a></div>
+			<h1><%=link_to "EcoGranja", root_path%></h1>
+			<div id="login">
+				<%= render :partial => 'layouts/login' %>
+			</div>	
+	</div>
+	<div id="navigation">
+		<%= render :partial => 'layouts/menu' %>
+	</div>
+	<div id="notice">
+		
+	</div>  
+	<div id="content">
+		<%= yield %>
+	</div>
+	<div id="footer">
+		<%=link_to("EcoGranja", {:controller=>"home", :action=>"index"}, :class => 'secuencia')%> |
+		<%=link_to("Aprendizaje", {:controller=>"home", :action=>"learning"}, :class => 'secuencia')%> |
+		<%=link_to("Gestión de Granjas", {:controller=>"home", :action=>"farmsadmin"}, :class => 'secuencia')%> |
+		<%=link_to("Toma de decisiones", {:controller=>"home", :action=>"decisionmaking"}, :class => 'secuencia')%> |
+		<%=link_to("Administración", {:controller=>"home", :action=>"administration"}, :class => 'secuencia')%>
+	</div>
+	<div id="credits">
+		<p>Desarrollado por: <a>John.Talent</a></p>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var libraries = {};
+	var dataTable;
+	var dataTables_spanish;
+	
+	function clear_form_elements(ele) {
+	    $(ele).find(':input').each(function() {
+	        switch(this.type) {
+	            case 'password':
+	            case 'select-multiple':
+	            case 'select-one':
+	            case 'text':
+	            case 'textarea':
+	                $(this).val('');
+	                break;
+	            case 'checkbox':
+	            case 'radio':
+	                this.checked = false;
+	        }
+	    });
+	}
+	
+	function ajaxContentRedirect(href, callback){
+		var styleFunction = 'main_'+href.split('/')[3];
+		window.history.pushState({ foo: "bar" }, document.title, href);
+		$('#content').empty();
+		$('#content').load(href, function(){
+			if(typeof callback == 'function'){
+				callback();
+			}
+			else if(eval("typeof "+styleFunction+" == 'function'")){
+				jQuery.globalEval(styleFunction+'()');
+			};
+		});
+	};
+	
+	function ready_jquery_ui(){
+		$("#content .button").button();
+		$("#content form").bind("keypress", function(e) {
+    		if (e.keyCode == 13) return false;
+		});
+		$("#content .cell label, #content fieldset").addClass("ui-state-default ui-corner-all");
+		$("#content .cell input").addClass("ui-widget-content");
+		$("#content .field label").addClass("ui-state-default ui-corner-all");
+		$("#content .field input").addClass("ui-widget-content");
+		$("#content .field select").addClass("ui-widget-content");
+	}; 
+	
+	function complete_jquery_ui(data, textStatus, jqxhr){
+		if(textStatus == 'success'){
+			libraries['jquery_ui']			=true;
+			ready_jquery_ui();
+		}
+	};
+	
+	function ready_jquery_tools(){
+		$("#content form :input[type=text],"+ 
+		  "#content form :input[type=password]").tooltip({
+			position: "center right",
+		    offset: [-2, 10],
+		  	effect: "fade",
+		    opacity: 0.7
+		});
+	};
+	
+	function complete_jquery_tools(data, textStatus, jqxhr){
+		if(textStatus == 'success'){
+			libraries['jquery_tools'] 		=true;
+			ready_jquery_tools();
+		}
+	};
+	
+	function ready_jquery_data_tables(table_id){
+    	dataTable = $('#'+table_id).dataTable({
+		        	'bRetrieve': true,
+		        	'bJQueryUI': true,
+		        	'iDisplayLength': 4,
+					'sPaginationType': 'full_numbers',
+					'sScrollX': '940px',
+		        	'bScrollCollapse': true,
+					'oLanguage': dataTables_spanish
+		        });
+	};
+	
+    $(document).ready(function () {
+    	libraries['rails']				= true;
+    	libraries['jquery']				= true;
+    	libraries['jquery_ui']			= false;
+    	libraries['jquery_data_tables']	= false;
+    	libraries['jquery_tools']		= false;
+    	libraries['google_maps']		= false;
+    	libraries['ckeditor']			= false;
+    	libraries['poo']				= false;
+    	libraries['mathlib']			= false;
+    	libraries['k3d']				= false;
+    	libraries['viewer']				= false;
+    	libraries['highcharts']			= false;
+    	libraries['sys_dyn_simulator']	= false;
+    	libraries['sys_dyn_main']		= false;
+    	
+    	$('#navigation a, #login a, #header a').click(function() {
+        	ajaxContentRedirect(this.href);
+        	return false;
+    	});
+    	$('#menutd > li > a:first').unbind('click');
+    });    
+</script> 
+</body>
+</html>

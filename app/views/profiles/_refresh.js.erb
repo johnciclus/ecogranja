@@ -1,0 +1,23 @@
+<% if flash[:success] == true %>
+	<% unless @current_action == 'index'%>
+		<% if @current_action == 'edit'%>
+			$('#profile').html("<%= escape_javascript(render :partial => 'form') %>");
+		<% else %>
+			clear_form_elements($('#profile > form')[0])
+			$('#profiles').html("<%= escape_javascript(render :partial => 'profiles') %>");
+		<% end %>
+			main_profiles();
+	<% else %>
+		$('#navigation').html("<%= escape_javascript(render :partial => "layouts/menu") %>");
+		$('#navigation a').on('click', function() {
+			ajaxContentRedirect(this.href);
+			return false;
+		});
+		$('#menutd > li > a:first').unbind('click');
+	<% end %>	
+<% end %>
+
+$('html, body').animate({scrollTop:0}, 'slow');
+$('#notice').html('<%= flash[:notice].html_safe %>');
+$('#notice').slideDown("fast").delay(2500).fadeOut("slow");
+<% flash[:notice] = nil %>

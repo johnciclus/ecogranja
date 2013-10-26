@@ -1,0 +1,14 @@
+<%= form_for(@profile, :remote => true) do |f| %>	
+	<div class="field">
+    	<%= f.label :name, "Nombre"%><br />
+    	<%= f.text_field :name, :title => 'Nombre del perfil'  %>
+	</div>
+	<div class="field">
+    	<%= f.label :permissions, "Permisos"%><br />
+    	<%= f.text_field :permissions, :title => "Tipo de permiso {'admin'|'normal'|'public'}" %>
+    </div>
+    <div class="actions">
+    	<%= f.submit "Guardar perfil", :class => "button" %>
+	</div>
+  
+<% end %>

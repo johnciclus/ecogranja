@@ -1,0 +1,63 @@
+<% if @user.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@user.errors.count, "error") %>, posibles causas:</h2>
+	  <ul>
+	      <% @user.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	  </ul>
+	</div>
+<% end %>
+
+<h3><span></span>Usuario</h3>
+<br/>
+<div id="user">
+	<%= render :partial => 'form' %>
+</div>
+
+<% if @mode == 'admin' %>
+	<div class="separator"></div>
+
+	<h3><span></span> Listado de usuarios</h3>
+	<br/>
+	<div id="users">	
+		<%= render :partial => 'users' %>
+	</div>
+<% end %>
+
+<div class="cleaner"></div>
+
+<script type="text/javascript">	
+	function complete_jquery_data_tables_users(data, textStatus, jqxhr){
+		if(textStatus == 'success'){
+			libraries['jquery_data_tables']	=true;
+			ready_jquery_data_tables('tablaUsuarios');
+		}
+	};
+	function main_users(){
+		if(!libraries['jquery_ui']){
+			$.getScript("/assets/jquery/jquery-ui-1.8.23.custom.min.js", complete_jquery_ui);
+		}
+		else{
+			ready_jquery_ui();
+		}
+		if(!libraries['jquery_tools']){
+			$.getScript("/assets/jquery/jquery.tools.min.js", complete_jquery_tools);
+		}
+		else{
+			ready_jquery_tools();
+		}
+		<% if @mode == 'admin' %>
+			if(!libraries['jquery_data_tables']){
+				$.getScript("/assets/jquery/jquery.dataTables.min.js", complete_jquery_data_tables_users);
+			}
+			else{
+				ready_jquery_data_tables('tablaUsuarios');
+			}
+		<% end %>
+	};
+	
+	$(document).ready(function () {
+		main_users();
+	});
+</script>

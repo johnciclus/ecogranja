@@ -1,0 +1,33 @@
+<table id="tablaArticulos">
+<thead>
+<tr>
+  <th>Título</th>
+  <th>Contenido</th>
+  <th>Categoría</th>
+  <% if @mode == 'admin' %>
+	  <th>Mostrar</th>
+	  <th>Editar</th>
+	  <th>Eliminar</th>
+  <% end %>	  
+</tr>
+</thead>
+<tbody>
+	<% @articles.each do |article| %>
+	<tr>
+	  <td><b><%= link_to article.title, article, :method => "get", :remote => true  %></b></td>
+	  <td>	 <%= link_to truncate(article.content, :length => 300).html_safe, article, :method => "get", :remote => true %></td>
+	  <td>	 <%= article.category.name %></td>
+	  <% if @mode == 'admin' %>
+		  <td><%= link_to 'Mostrar', article, :class => "button" %></td>
+		  <td><%= link_to 'Editar', edit_article_path(article), :class => "button" %></td>
+		  <td><%= button_to "Eliminar", article, :method => :delete %></td>
+	  <% end %>  
+	</tr>
+	<% end %>
+</tbody>
+</table>
+ 
+<br />
+<% if @mode == 'admin' %>
+	<%= link_to 'Nuevo Articulo', { :controller => "articles", :action => "admin"}, :class => "button" %>
+<% end %>

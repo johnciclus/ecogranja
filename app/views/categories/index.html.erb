@@ -1,0 +1,19 @@
+<% if flash[:notice] %>
+<div id="notice">
+	<p> <b>Noticia: </b><%= flash[:notice].html_safe %></p>
+</div>  
+<% end %>
+
+<h3><span></span> Nueva categoría</h3>
+<br/>
+<div id="category_form" class="center">
+	<%= render 'form' %>
+</div>
+
+<div class="separator"></div>
+
+<h3><span></span> Listado de categorias</h3>
+<br/>
+<div id="categories">	
+	<%= render :partial => "categories", :locals => {:mode => 'admin'} %>
+</div>

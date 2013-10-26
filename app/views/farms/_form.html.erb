@@ -1,0 +1,97 @@
+<%= form_for(@farm, :remote => 'true') do |f| %>
+	<div class="field">
+		<%= f.label :name, "Nombre de la Granja" %><br />
+		<%= f.text_field :name, :title => "Razón social de la Granja" %>
+	</div>
+	<div class="field">
+	    <%= f.label :owner, "Propietario" %><br />
+	    <%= f.text_field :owner, :title => "Nombre de la persona juridica o natural dueña de la granja" %>
+    </div>
+    <% if @mode == 'normal' %>
+    	<%= f.hidden_field :user_id, :value => @user.id %>
+    <% elsif @mode == 'admin' %>
+	    <div class="field">
+	    	<%= f.label :user_id, "Usuario" %><br />
+	    	<%= f.select :user_id, @users.collect {|c| [ c.username, c.id ]}, :title => 'Seleccionar un usuario' %>
+	    </div>
+    <% end %>
+    <div class="field">
+    	<%= f.label :address, "Dirección" %><br />
+    	<%= f.text_field :address, :title => 'Dirección de la Granja' %>
+    </div>
+    <div class="field">
+    	<%= f.label :city, "Ciudad/Pueblo" %><br />
+    	<%= f.text_field :city, :title => 'Ciudad o pueblo donde se ubica la Granja' %>
+    </div>
+    <div class="field">
+    	<%= f.label :state, "Departamento/Estado" %><br />
+    	<%= f.text_field :state, :title => 'Departamento o estado donde se ubica la Granja' %>
+    </div>
+    <div class="field">
+    	<%= f.label :country, "País" %><br />
+    	<%= f.text_field :country, :title => 'País donde se ubica la Granja' %>
+    </div>
+    <br />
+    <br />
+    <h3><span></span>Datos geograficos</h3>
+    <br />
+    <div id='viewer_container'>
+		<div id='viewer_maps'>    	
+			<div id='google_maps'>
+			</div>
+			<div id="viewer_canvas">
+				<canvas id="canvas">
+					Su navegador web no soporta el elemento Canvas (HTML5).
+				</canvas>
+			</div>
+		</div>
+		<div id='viewer_controls'>
+			<button id='setGeoData' class='button'>Asignar datos geograficos</button>
+			<button id='resize' class='button'>Resize</button>
+		</div>
+	</div>
+	<br />
+    <div class="field">
+    	<%= f.label :area, "Área" %><br />
+    	<%= f.text_field :area, :title => 'Área aproximada de la Granja <br />metros cuadrados [m²]' %>
+    </div>
+    <div class="field">
+    	<%= f.label :loc_lat, 'Latitud promedio' %><br />
+    	<%= f.text_field :loc_lat, :title => 'Latitud promedio del área seleccionada' %>
+    </div>
+    <div class="field">
+    	<%= f.label :loc_lng, "Longitud promedio" %><br />
+    	<%= f.text_field :loc_lng, :title => 'Longitud promedio del área seleccionada' %>
+    </div>
+    <div class="field">
+    	<%= f.label :loc_alt, "Altitud promedio" %><br />
+    	<%= f.text_field :loc_alt, :title => 'Altitud promedio del área seleccionada' %>
+    </div>
+    <div class="field">
+    	<%= f.label :avg_slope, "Pendiente promedio" %><br />
+    	<%= f.text_field :avg_slope, :title => 'Pendiente promedio del área seleccionada' %>
+    </div>
+    <%= f.fields_for :coordinates, @farm.coordinates do |coord| %>
+	    <fieldset>
+	    	<legend>Coordenada <%= (coord.object.ind + 1) %> </legend>
+	    	<%= coord.hidden_field :ind %>
+		    <div class="cell">
+		    	<%= coord.label :lat, "Latitud" %><br />
+		    	<%= coord.text_field :lat, :title => 'Latitud de la coordenada '+(coord.object.ind + 1).to_s %>
+		    </div>
+		    <div class="cell">
+		    	<%= coord.label :lng, "Longitud" %><br />
+		    	<%= coord.text_field :lng, :title => 'Longitud de la coordenada '+(coord.object.ind + 1).to_s %>
+		    </div>
+		    <div class="cell">
+		    	<%= coord.label :alt, "Altitud" %><br />
+		    	<%= coord.text_field :alt, :title => 'Altitud de la coordenada '+(coord.object.ind + 1).to_s %>
+		    </div>
+	    </fieldset>
+    <% end %>
+    
+	<div class="actions">
+		<%= f.submit 'Registrar Granja', :class => 'button'%>
+	</div>
+<% end %>
+

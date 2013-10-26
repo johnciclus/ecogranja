@@ -1,0 +1,54 @@
+<%= form_for(@user, :remote => true) do |f| %>
+    
+  <div class="field">
+    <%= f.label :username, "Nombre de usuario"%><br />
+    <%= f.text_field :username, :title => 'Nombre del usuario en el sistema<br /> Tipo: alfanumérico (4-25 caracteres) <br /> Ej: pedro007.' %>
+  </div>
+  <div class="field">
+    <%= f.label :name, "Nombre completo"%><br />
+    <%= f.text_field :name, :title => 'Nombre del usuario<br /> Tipo: alfabético <br /> Ej: Pedro Perez.' %>
+  </div>
+  <div class="field">
+    <%= f.label :password, "Contraseña"%><br />
+    <%= f.password_field :password, :title => 'Contraseña del usuario<br /> Tipo: alfanumérico (6-20 caracteres)<br /> Ej: s3cr3t.' %>
+  </div>
+  <div class="field">
+    <%= f.label :password, "Confirmar contraseña"%><br />
+    <%= f.password_field :password_confirmation, :title => 'Reescribir la contraseña del usuario<br /> Tipo: alfanumérico (6-20 caracteres)<br /> Ej: s3cr3t.' %>
+  </div>
+  <% unless @mode == 'admin' %>
+  	<%= f.hidden_field :profile_id, :value => @profile.id %>
+  <% else %>
+  	<div class="field">
+  		<%= f.label :profile_id, "Perfil de usuario"%><br />
+  		<%= f.select :profile_id, @profiles.collect {|c| [ c.name, c.id ]}, :title => 'Seleccionar un perfil de usuario' %>
+  	</div>
+  <% end %>  
+  <div class="field">
+    <%= f.label :email, "Correo electronico" %><br />
+    <%= f.text_field :email, :title => 'Correo electrónico del usuario<br /> Tipo: alfanumérico (usuario@correo.co) <br /> Ej: pedro@correo.co' %>
+  </div>
+  <div class="field">
+    <%= f.label :occupation, "Ocupación" %><br />
+    <%= f.text_field :occupation, :title => 'Ocupación del usuario<br /> Tipo: alfabético <br /> Ej: Estudiante.' %>
+  </div>
+  <div class="field">
+    <%= f.label :organization, "Organización" %><br />
+    <%= f.text_field :organization, :title => 'Organización a la que pertenece el usuario<br /> Tipo: alfabético <br /> Ej: Universidad.' %>
+  </div>
+  <div class="field">
+    <%= f.label :city, "Ciudad" %><br />
+    <%= f.text_field :city, :title => 'Ciudad de residencia del usuario<br /> Tipo: alfabético <br /> Ej: Bogota.' %>
+  </div>
+  <div class="field">
+    <%= f.label :state, "Departamento / Estado" %><br />
+    <%= f.text_field :state, :title => 'Estado o departamento de residencia del usuario<br /> Tipo: alfabético <br /> Ej: Cundinamarca.' %>
+  </div>
+  <div class="field">
+    <%= f.label :country, "País" %><br />
+    <%= f.text_field :country, :title => 'País de residencia del usuario<br /> Tipo: alfabético <br /> Ej: Colombia.' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Registrar usuario", :class => "button" %>
+  </div>
+<% end %>

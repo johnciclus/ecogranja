@@ -1,0 +1,25 @@
+<%= form_for(@production, :remote => true) do |f| %>
+	<div class="field">
+		<%= f.label :farm_id, "Granja" %><br />
+		<%= f.select :farm_id, @farms.collect {|c| [ c.name, c.id ]}, :title => 'Seleccionar granja a la que pertenece el ambiente<br /> Tipo: seleccion <br /> Ej: El Hangar.' %>
+	</div>
+	<div class="field">
+		<%= f.label :name, "Nombre de la Producción" %><br />
+		<%= f.text_field :name, :title => 'Nombre que representa la producción <br /> Tipo: alfabético <br /> Ej: intensiva.' %>
+	</div>
+	<div class="field">
+		<%= f.label :AreaCultivo, "Area de cultivo" %><br />
+		<%= f.text_field :AreaCultivo, :title => 'Área destinada al cultivo <br /> Tipo: numérico <br /> Unidades: metros cuadrados [m²]<br />Limites: 0 - '+@production_area.to_s+'<br /> Ej: 10000' %>
+	</div>
+	<div class="field">
+		<%= f.label :DistHorizontal, "Distancia horizontal" %><br />
+		<%= f.text_field :DistHorizontal, :title => 'Distancia horizontal entre cada unidad productiva <br /> Tipo: numérico <br /> Unidades: metros [m]<br /> Ej: 1' %>
+	</div>
+	<div class="field">
+		<%= f.label :DistVertical, "Distancia vertical" %><br />
+		<%= f.text_field :DistVertical, :title => 'Distancia vertical entre cada unidad productiva <br /> Tipo: numérico <br /> Unidades: metros [m]<br /> Ej: 1' %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Registrar Producción", :class => "button"%>
+	</div>
+<% end %>

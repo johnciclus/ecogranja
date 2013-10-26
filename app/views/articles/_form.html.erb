@@ -1,0 +1,30 @@
+<%= form_for(@article) do |f| %>  
+  <div class="field">
+    <%= f.label :title, "Título"%><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id, "Categoría"%><br />
+    <%= f.select :category_id, @categories.collect {|c| [ c.name, c.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :content, "Contenido" %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Guardar articulo" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    	$("form").bind("keypress", function(e) {
+            if (e.keyCode == 13) return false;
+      	});
+        $(".field label").addClass("ui-state-default ui-corner-all");
+        $(".field input").addClass("ui-widget-content");
+        $("input[type=submit]").button();
+       
+        $(".field textarea").ckeditor({toolbar: 'EssentialToolbar'});
+    });
+</script> 

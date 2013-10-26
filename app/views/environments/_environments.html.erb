@@ -1,0 +1,35 @@
+<table id="tablaAmbientes">
+<thead>
+<tr>
+  <th>Granja</th>
+  <th>Nombre</th>
+  <th>Nitrogeno</th>
+  <th>Fosforo</th>
+  <th>Potasio</th>
+  <th>PhSuelo</th>
+  <th>Densidad Aparente</th>
+  <th>Profundidad</th>
+  <th>Editar</th>
+  <th>Eliminar</th>
+</tr>
+</thead>
+<tbody>
+	<% @environments.each do |environment| %>
+	<tr>
+	  <td><b><%= environment.farm.name %></b></td>
+	  <td>	 <%= environment.name %></td>
+	  <td>	 <%= environment.Nitrogeno %></td>
+	  <td>	 <%= environment.Fosforo %></td>
+	  <td>	 <%= environment.Potasio %></td>
+	  <td>	 <%= environment.PhSuelo %></td>
+	  <td>	 <%= environment.DensidadAparente %></td>
+	  <td>	 <%= environment.Profundidad %></td>
+	  <td>	 <%= link_to 'Editar', edit_environment_path(environment), :method => "get", :remote => true, :class => "button" %></td>
+	  <td>	 <%= button_to "Eliminar", environment, :method => :delete, :remote => true, :class => "button" %></td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<br />
+	<%= link_to 'Nuevo Ambiente', { :controller => "environments", :action => "index"}, :class => "button" %>

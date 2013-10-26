@@ -1,0 +1,26 @@
+<%= form_for(@soil_improvement, :remote => true) do |f| %>
+	
+	<div class="field">
+		<%= f.label :farm_id, "Granja" %><br />
+		<%= f.select :farm_id, @farms.collect {|c| [ c.name, c.id ]}, :title => 'Seleccionar granja a la que pertenece el ambiente<br /> Tipo: seleccion <br /> Ej: El Hangar.' %>
+	</div>
+	<div class="field">
+		<%= f.label :name, "Nombre del mejoramiento de suelos" %><br />
+		<%= f.text_field :name, :title => 'Nombre que representa el proceso de mejoramiento de suelos<br /> Tipo: alfabético <br /> Ej: Mejoramiento minimo.' %>
+	</div>
+	<div class="field">
+		<%= f.label :DiasApliCal, "Días de aplicación de cal" %><br />
+		<%= f.text_field :DiasApliCal, :title => 'Conjunto de dias donde se aplicará la enmiendas de cal <br /> Tipo: vector de numeros <br />[día, día, día]<br /> Ej: [0,10,20]' %>
+	</div>
+	<div class="field">
+		<%= f.label :DiasApliFer, "Días de aplicación de fertilizante" %><br />
+		<%= f.text_field :DiasApliFer, :title => 'Conjunto de dias donde se aplicará la enmiendas de fertilizantes <br /> Tipo: vector de numeros <br />[día, día, día, día, día]<br /> Ej: [1,10,20,30,40]' %>
+	</div>
+	<div class="field">
+		<%= f.label :CompFertilizante, "Componentes de fertilizante" %><br />
+		<%= f.text_field :CompFertilizante, :title => 'Conjunto de porcentajes que representan el tipo de fertilizante <br /> Tipo: vector de numeros <br />[%, %, %]<br /> Ej: [0.15,0.15,0.15]'  %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Registrar Mejoramiento de Suelo", :class => "button"%>
+	</div>
+<% end %>

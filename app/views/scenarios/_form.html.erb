@@ -1,0 +1,33 @@
+<%= form_for(@scenario, :remote => true) do |f| %>	
+	<div class="field">
+		<%= f.label :name, "Nombre del escenario" %><br />
+		<%= f.text_field :name, :title => 'Nombre del escenario de producción agropecuaria<br /> Tipo: alfanumérico <br /> Ej: Alta producción.' %>
+	</div>
+	<div class="field">
+		<%= f.label :description, "Descripción del escenario" %><br />
+		<%= f.text_field :description, :title => 'Descripción <br /> Tipo: alfabético <br /> Ej: Escenario que agrupa las condiciones para una producción intensiva' %>
+	</div>
+	<div class="field">
+		<%= f.label  :farm_id, "Granja" %><br />
+		<%= f.select :farm_id, @farms.collect {|c| [ c.name, c.id ]}, :title => 'Granja seleccionada' %>
+	</div>
+	<div class="field">
+		<%= f.label  :environment_id, "Ambiente" %><br />
+		<%= f.select :environment_id, @environments.collect {|c| [ c.name, c.id ]}, :title => 'Ambiente seleccionado' %>
+	</div>
+	<div class="field">
+		<%= f.label  :production_id, "Producción" %><br />
+		<%= f.select :production_id, @productions.collect {|c| [ c.name, c.id ]}, :title => 'Producción seleccionada' %>
+	</div>
+	<div class="field">
+		<%= f.label  :soil_improvement_id, "Mejoramiento de suelo" %><br />
+		<%= f.select :soil_improvement_id, @soil_improvements.collect {|c| [ c.name, c.id ]}, :title => 'Mejoramiento de suelo seleccionado' %>
+	</div>
+	<div class="field">
+		<%= f.label  :crop_id, "Cultivo" %><br />
+		<%= f.select :crop_id, @crops.collect {|c| [ c.name, c.id ]}, :title => 'Cultivos disponibles' %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Registrar Producción", :class => "button"%>
+	</div>
+<% end %>

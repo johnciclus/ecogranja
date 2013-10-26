@@ -1,0 +1,29 @@
+<table id="tablaMejoramientoSuelos">
+<thead>
+<tr>
+  <th>Granja</th>
+  <th>Nombre</th>
+  <th>Días de aplicación de cal</th>
+  <th>Días de aplicación de fertilizante</th>
+  <th>Componentes de fertilizante</th>
+  <th>Editar</th>
+  <th>Eliminar</th>
+</tr>
+</thead>
+<tbody>
+	<% @soil_improvements.each do |soil_improvement| %>
+	<tr>
+	  <td><b><%= soil_improvement.farm.name %></b></td>
+	  <td>	<%= soil_improvement.name %></td>
+	  <td>	<%= soil_improvement.DiasApliCal %></td>
+	  <td>	<%= soil_improvement.DiasApliFer %></td>
+	  <td>	<%= soil_improvement.CompFertilizante %></td>
+	  <td>	<%= link_to 'Editar', edit_soil_improvement_path(soil_improvement), :method => "get", :remote => true, :class => "button" %></td>
+	  <td>	<%= button_to "Eliminar", soil_improvement, :method => :delete, :remote => true, :class => "button" %></td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<br />
+<%= link_to 'Nuevo Mejoramiento de Suelo', { :controller => "productions", :action => "index"}, :class => "button" %>

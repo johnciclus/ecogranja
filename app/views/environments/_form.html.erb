@@ -1,0 +1,37 @@
+<%= form_for(@environment, :remote => true) do |f| %>
+	<div class="field">
+		<%= f.label  :farm_id, "Granja" %><br />
+		<%= f.select :farm_id, @farms.collect {|c| [ c.name, c.id ]}, :title => 'Seleccionar granja a la que pertenece el ambiente<br /> Tipo: seleccion <br /> Ej: El Hangar.' %>
+	</div>
+	<div class="field">
+		<%= f.label :name, "Nombre del Ambiente" %><br />
+		<%= f.text_field :name, :title => 'Nombre que representa las condiciones ambientales<br /> Tipo: alfabético <br /> Ej: Ambiente templado.' %>
+	</div>
+	<div class="field">
+		<%= f.label :Nitrogeno, "Nitrogeno" %><br />
+		<%= f.text_field :Nitrogeno, :title => 'Porcentaje de nitrogéno que tiene el suelo la granja, se puede conseguir del estudio del suelo<br /> Tipo: numerico <br /> Unidades: Porcentaje [%]<br /> Ej: 0.13' %>
+	</div>
+	<div class="field">
+		<%= f.label :Fosforo, "Fosforo" %><br />
+		<%= f.text_field :Fosforo, :title => 'Partes por millón de fósforo que tiene el suelo la granja, se puede obtener de un estudio de suelo<br /> Tipo: numerico <br /> Unidades: Partes por millón [p.p.m]<br /> Ej: 11.6' %>
+	</div>
+	<div class="field">
+		<%= f.label :Potasio, "Potasio" %><br />
+		<%= f.text_field :Potasio, :title => 'Miliequivalentes por 100 gramos de potasio que tiene el suelo la granja, se puede obtener de un estudio de suelo<br /> Tipo: numerico <br /> Unidades: Miliequivalentes por 100 gramos [meq/100gr]<br /> Ej: 0.03' %>
+	</div>
+	<div class="field">
+		<%= f.label :PhSuelo, "Ph del Suelo" %><br />
+		<%= f.text_field :PhSuelo, :title => 'Medida de PH que presenta el suelo de la granja, se puede obtener de un estudio de suelo<br /> Tipo: numerico <br /> Unidades: [ph]<br /> Ej: 5.6' %>
+	</div>
+	<div class="field">
+		<%= f.label :DensidadAparente, "Densidad Aparente" %><br />
+		<%= f.text_field :DensidadAparente, :title => 'Densidad aparente del suelo de la granja, se puede obtener de un estudio de suelo<br /> Tipo: numerico <br /> Unidades: Gramos sobre centimetro cubico [g/(cm^3)]<br /> Ej: 1' %>
+	</div>
+	<div class="field">
+		<%= f.label :Profundidad, "Profundidad" %><br />
+		<%= f.text_field :Profundidad, :title => 'Profundidad productiva del suelo de la granja, se puede obtener de un estudio de suelo<br /> Tipo: numerico <br /> Unidades: Centimetros [cm]<br /> Ej: 30' %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Registrar Ambiente", :class => "button"%>
+	</div>
+<% end %>

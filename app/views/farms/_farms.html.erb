@@ -1,0 +1,41 @@
+<table id="tablaGranjas">
+<thead>
+<tr>
+  <th>Nombre</th>
+  <th>Usuario</th>
+  <th>Propietario</th>
+  <th>Dirección</th>
+  <th>Ciudad/Pueblo</th>
+  <th>Departamento/Estado</th>
+  <th>País</th>
+  <th>Latitud promedio</th>
+  <th>Longitud promedio</th>
+  <th>Altitud promedio</th>
+  <th>Área</th>
+  <th>Editar</th>
+  <th>Eliminar</th>
+</tr>
+</thead>
+<tbody>
+	<% @farms.each do |farm| %>
+	<tr>
+	  <td><b><%= farm.name %></b> </td>
+	  <td>	 <%= farm.user.username %></td>
+	  <td>	 <%= farm.owner %></td>
+	  <td>	 <%= farm.address %></td>
+	  <td>	 <%= farm.city %></td>
+	  <td>	 <%= farm.state %></td>
+	  <td>	 <%= farm.country %></td>
+	  <td>	 <%= farm.loc_lat %></td>
+	  <td>	 <%= farm.loc_lng %></td>
+	  <td>	 <%= farm.loc_alt %></td>
+	  <td>	 <%= farm.area %></td>
+	  <td><%= button_to 'Editar', edit_farm_path(farm), :method => :get, :remote => 'true', :class => 'button' %></td>
+	  <td><%= button_to 'Eliminar', farm, :method => :delete, :remote => 'true', :class => 'button' %></td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+ 
+<br />
+<%= link_to 'Nueva Granja', { :controller => "farms", :action => "index"}, :class => "button" %>

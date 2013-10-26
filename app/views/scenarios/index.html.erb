@@ -1,0 +1,67 @@
+<% unless @mode == 'public' %>	
+	<% if @scenario.errors.any? %>
+		<div id="error_explanation">
+			<h2> <%= pluralize(@scenario.errors.count, "error")%>, posibles causas:</h2>
+			<ul>
+				<% @scenario.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>		
+			</ul>	
+		</div>
+	<% end %>
+	
+	<h3><span></span>Escenario</h3>
+	<br/>
+	<div id="scenario">	
+		<%= render :partial => "form" %>
+	</div>
+	
+	<div class="separator"></div>
+	
+	<h3><span></span> Listado de escenarios</h3>
+	<br/>
+	<div id="scenarios">	
+		<%= render :partial => "scenarios" %>
+	</div>
+
+<% end %>
+
+<div class="cleaner"></div>
+
+<% unless @mode == 'public' %>
+	<script type="text/javascript">	
+		function complete_jquery_data_tables_scenarios(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['jquery_data_tables']	=true;
+				ready_jquery_data_tables('tablaEscenarios');
+			}
+		};
+		function main_scenarios(){
+			if(!libraries['jquery_ui']){
+				$.getScript("/assets/jquery/jquery-ui-1.8.23.custom.min.js", complete_jquery_ui);
+			}
+			else{
+				ready_jquery_ui();
+			}
+			if(!libraries['jquery_tools']){
+				$.getScript("/assets/jquery/jquery.tools.min.js", complete_jquery_tools);
+			}
+			else{
+				ready_jquery_tools();
+			}
+			if(!libraries['jquery_data_tables']){
+				$.getScript("/assets/jquery/jquery.dataTables.min.js", complete_jquery_data_tables_scenarios);
+			}
+			else{
+				ready_jquery_data_tables('tablaEscenarios');
+			}
+			
+		};
+		
+		$(document).ready(function () {
+			main_scenarios();
+			<%= render :file => "scenarios/_refresh.js.erb" %>
+		});
+		
+	</script> 
+<% end %>

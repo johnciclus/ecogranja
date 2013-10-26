@@ -1,0 +1,66 @@
+<% unless @mode == 'public' %>
+	<% if @soil_improvement.errors.any? %>
+		<div id="error_explanation">
+			<h2> <%= pluralize(@soil_improvement.errors.count, "error")%>, posibles causas:</h2>
+			<ul>
+				<% @soil_improvement.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>		
+			</ul>	
+		</div>
+	<% end %>
+	
+	<h3><span></span>Mejoramiento de suelos</h3>
+	<br/>
+	<div id="soil_improvement">	
+		<%= render :partial => "form" %>
+	</div>
+	
+	<div class="separator"></div>
+	
+	<h3><span></span> Listado de mejoramiento de suelos</h3>
+	<br/>
+	<div id="soil_improvements">	
+		<%= render :partial => "soil_improvements" %>
+	</div>
+<% end %>
+
+<div class="cleaner"></div>
+
+<% unless @mode == 'public' %>
+	<script type="text/javascript">	
+		function complete_jquery_data_tables_soil_improvements(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['jquery_data_tables']	=true;
+				ready_jquery_data_tables('tablaMejoramientoSuelos');
+			}
+		};
+		function main_soil_improvements(){
+			if(!libraries['jquery_ui']){
+				$.getScript("/assets/jquery/jquery-ui-1.8.23.custom.min.js", complete_jquery_ui);
+			}
+			else{
+				ready_jquery_ui();
+			}
+			if(!libraries['jquery_tools']){
+				$.getScript("/assets/jquery/jquery.tools.min.js", complete_jquery_tools);
+			}
+			else{
+				ready_jquery_tools();
+			}
+			if(!libraries['jquery_data_tables']){
+				$.getScript("/assets/jquery/jquery.dataTables.min.js", complete_jquery_data_tables_soil_improvements);
+			}
+			else{
+				ready_jquery_data_tables('tablaMejoramientoSuelos');
+			}
+			
+		};
+		
+		$(document).ready(function () {
+			main_soil_improvements();
+			<%= render :file => "soil_improvements/_refresh.js.erb" %>
+		});
+		
+	</script> 
+<% end %>

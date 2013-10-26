@@ -1,0 +1,60 @@
+<%unless defined? mode
+	mode = 'normal'
+  end %>
+<table id="tablaCoordenadas">
+<thead>
+<tr>
+  <th>Granja</th>
+  <th>Índice</th>
+  <th>Latitud</th>
+  <th>Longitud</th>
+  <th>Altitud</th>
+  <% if mode.eql? 'admin' %>
+	  <th>Editar</th>
+	  <th>Eliminar</th>
+  <% end %>
+</tr>
+</thead>
+<tbody>
+	<%if @coordinates.empty? %>
+		<tr>
+			<td colspan="7"><h3> No se encontraron registros.</h3></td>
+		</tr>
+	<%end%>
+
+	<% @coordinates.each do |coordinate| %>
+	<tr>
+	  <td><b><%= link_to(coordinate.farm.name, coordinate) %></b></td>
+	  <td>	 <%= coordinate.ind %></td>
+	  <td>	 <%= coordinate.lat %></td>
+	  <td>	 <%= coordinate.lng %></td>
+	  <td>	 <%= coordinate.alt %></td>
+	  <% if mode.eql? 'admin' %>
+		  <td><%= link_to 'Editar', edit_coordinate_path(coordinate), :class => "button" %></td>
+		  <td><%= button_to "Eliminar", coordinate, :method => :delete %></td>
+	  <% end %>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+<br />
+<% if mode.eql? 'admin' %>
+	<%= link_to 'Nueva Coordenada', { :controller => "coordinate", :action => "index"}, :class => "button" %>
+<% end %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.button").button();
+        $("input[type=submit]").button();
+        
+        $("#tablaCoordenadas").dataTable({
+        	"bJQueryUI": true,
+        	"iDisplayLength": 4,
+			"sPaginationType": "full_numbers",
+			"sScrollX": "940px",
+        	"bScrollCollapse": true,
+			"oLanguage": {
+			    "sUrl": "/assets/jquery/dataTables.spanish"
+			}
+        });
+    });
+</script> 

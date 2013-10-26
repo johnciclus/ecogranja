@@ -1,0 +1,105 @@
+<%= form_for(@crop, :remote => true) do |f| %>	
+	<div class="field">
+		<%= f.label :article_id, "Articulo" %><br />
+		<%= f.select :article_id, @articles.collect {|c| [ c.title, c.id ]}, :title => 'Articulo que describe el cultivo' %>
+	</div>
+	<div class="field">
+		<%= f.label :name, "Nombre del cultivo" %><br />
+		<%= f.text_field :name, :title => 'Nombre del cultivo<br /> Tipo: alfanumérico <br /> Ej: Maiz.' %>
+	</div>
+	<div class="field">
+		<%= f.label :description, "Descripción del cultivo" %><br />
+		<%= f.text_field :description, :title => 'Descripción del cultivo<br /> Tipo: alfanumérico <br /> Ej: planta gramínea anual originaria de América.' %>
+	</div>
+	<div class="field">
+		<%= f.label :NabsorPro, "Nitrogeno absorbido" %><br />
+		<%= f.text_field :NabsorPro, :title => 'Nitrogeno necesario para el crecimiento del cultivo <br /> Tipo: numérico  <br /> Unidades: [Kg/tn] <br /> Ej: 22' %>
+	</div>
+	<div class="field">
+		<%= f.label :PAbsorPro, "Fósforo absorbido" %><br />
+		<%= f.text_field :PAbsorPro, :title => 'Fósforo necesario para el crecimiento del cultivo <br /> Tipo: numérico  <br /> Unidades: [Kg/tn] <br /> Ej: 4' %>
+	</div>
+	<div class="field">
+		<%= f.label :KAbsorPro, "Potasio absorbido" %><br />
+		<%= f.text_field :KAbsorPro, :title => 'Potasio necesario para el crecimiento del cultivo <br /> Tipo: numérico  <br /> Unidades: [Kg/tn] <br /> Ej: 19' %>
+	</div>
+	<div class="field">
+		<%= f.label :NExtraPro, "Nitrógeno extraido" %><br />
+		<%= f.text_field :NExtraPro, :title => 'Nitrógeno extraido para el crecimiento de la cosecha <br /> Tipo: numérico  <br /> Unidades: [Kg/tn] <br /> Ej: 15' %>
+	</div>
+	<div class="field">
+		<%= f.label :PExtraPro, "Fósforo extraido" %><br />
+		<%= f.text_field :PExtraPro, :title => 'Fósforo extraido para el crecimiento de la cosecha <br /> Tipo: numérico  <br /> Unidades: [Kg/tn] <br /> Ej: 3' %>
+	</div>
+	<div class="field">
+		<%= f.label :KExtraPro, "Potasio extraido" %><br />
+		<%= f.text_field :KExtraPro, :title => 'Potasio extraido para el crecimiento de la cosecha <br /> Tipo: numérico  <br /> Unidades: [Kg/tn] <br /> Ej: 4' %>
+	</div>
+	<div class="field">
+		<%= f.label :ProPhPlantas, "Promedio Ph requerido por las plantas" %><br />
+		<%= f.text_field :ProPhPlantas, :title => 'Medida del valor de Ph optimo para el desarrollo de la planta <br /> Tipo: numérico  <br /> Unidades: [ph] <br /> Ej: 6.5' %>
+	</div>
+	<div class="field">
+		<%= f.label :DesPhPlantas, "Desviación estandar del Ph requerido por las plantas" %><br />
+		<%= f.text_field :DesPhPlantas, :title => 'Medida de tolerancia del valor de Ph optimo para el desarrollo de la planta <br /> Tipo: numérico  <br /> Unidades: [ph] <br /> Ej: 0.5' %>
+	</div>
+	<div class="field">
+		<%= f.label :PesoUniCultivo, "Peso seco de una planta madura" %><br />
+		<%= f.text_field :PesoUniCultivo, :title => 'Peso de la planta cuando termina su desarrollo<br /> Tipo: numérico  <br /> Unidades: [gr] <br /> Ej: 276.7' %>
+	</div>
+	<div class="field">
+		<%= f.label :DesPesoUniCul, "Desviación estandar del peso seco de una planta madura" %><br />
+		<%= f.text_field :DesPesoUniCul, :title => 'Margen del peso de la planta cuando termina su desarrollo<br /> Tipo: numérico  <br /> Unidades: [gr] <br /> Ej: 31.07' %>
+	</div>
+	<div class="field">
+		<%= f.label :PesoUniCosecha, "Peso seco del total de la cosecha de una planta" %><br />
+		<%= f.text_field :PesoUniCosecha, :title => 'Peso de la cosecha durante todo un periodo productivo<br /> Tipo: numérico  <br /> Unidades: [gr] <br /> Ej: 238.2' %>
+	</div>
+	<div class="field">
+		<%= f.label :DesPesoUniCos, "Desviación estandar del peso seco de la cosecha de una planta" %><br />
+		<%= f.text_field :DesPesoUniCos, :title => 'Margen del peso de la cosecha durante todo un periodo productivo<br /> Tipo: numérico  <br /> Unidades: [gr] <br /> Ej: 31.07' %>
+	</div>
+	<div class="field">
+		<%= f.label :TiemVegetativo, "Tiempo en estado de crecimiento" %><br />
+		<%= f.text_field :TiemVegetativo, :title => 'Tiempo que tarda el cultivo en desarrollarse hasta estado productivo<br /> Tipo: numérico  <br /> Unidades: [días] <br /> Ej: 55' %>
+	</div>
+	<div class="field">
+		<%= f.label :TiemReproductivo, "Tiempo en estado de producción" %><br />
+		<%= f.text_field :TiemReproductivo, :title => 'Tiempo que tarda la producción del cultivo, es decir la cosecha<br /> Tipo: numérico  <br /> Unidades: [días] <br /> Ej: 57' %>
+	</div>
+	<div class="field">
+		<%= f.label :ProLumiPlanta, "Luminosidad promedio optima para el cultivo" %><br />
+		<%= f.text_field :ProLumiPlanta, :title => 'Promedio de luminosidad para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [horas-luz/año] <br /> Ej: 2500' %>
+	</div>
+	<div class="field">
+		<%= f.label :DesLumiPlanta, "Desviación estandar de la Luminosidad optima" %><br />
+		<%= f.text_field :DesLumiPlanta, :title => 'Tolerancia de la planta en cuanto a luminosidad para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [horas-luz/año] <br /> Ej: 700' %>
+	</div>
+	<div class="field">
+		<%= f.label :ProPreciPlanta, "Precipitacion promedio optima para el cultivo" %><br />
+		<%= f.text_field :ProPreciPlanta, :title => 'precipitación promedio de la planta en cuanto  para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [horas-luz/año] <br /> Ej: 1500' %>
+	</div>
+	<div class="field">
+		<%= f.label :DesPreciPlanta, "Desviación estandar de la precipitacion optima" %><br />
+		<%= f.text_field :DesPreciPlanta, :title => 'Desviación estandar de la planta en cuanto a precipitación para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [horas-luz/año] <br /> Ej: 200' %>
+	</div>
+	<div class="field">
+		<%= f.label :ProHumePlanta, "Humedad promedio optima para el cultivo" %><br />
+		<%= f.text_field :ProHumePlanta, :title => 'Humedad promedio de la planta para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [%] <br /> Ej: 75' %>
+	</div>
+	<div class="field">
+		<%= f.label :DesHumePlanta, "Desviación estandar de la Humedad promedio optima" %><br />
+		<%= f.text_field :DesHumePlanta, :title => 'Desviación estandar de la planta en cuanto a humedad para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [%] <br /> Ej: 5' %>
+	</div>
+	<div class="field">
+		<%= f.label :ProTempPlanta, "Temperatura promedio optima  para el cultivo" %><br />
+		<%= f.text_field :ProTempPlanta, :title => 'Temperatura promedio de la planta para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [%] <br /> Ej: 27.5' %>
+	</div>
+	<div class="field">
+		<%= f.label :DesTempPlanta, "Desviación estandar de la Temperatura promedio optima" %><br />
+		<%= f.text_field :DesTempPlanta, :title => 'Desviación estandar de la planta a temperatura para el optimo desarrollo del cultivo<br /> Tipo: numérico  <br /> Unidades: [%] <br /> Ej: 2.5' %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Registrar Cultivo", :class => "button"%>
+	</div>
+<% end %>

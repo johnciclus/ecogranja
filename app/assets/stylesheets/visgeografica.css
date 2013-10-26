@@ -1,0 +1,40 @@
+/* Visualizador Geografico */
+#viewer_container{
+	position: relative;
+	width: 480px;
+	height: 510px;
+}
+
+#viewer_maps{
+	position: relative;
+	height: 470px;
+}
+
+#google_maps{
+	margin: 5px;
+	border: 5px solid #70B500;
+	z-index: 1;
+}
+
+#viewer_canvas{
+	position: absolute;
+	top: 244px;
+	left: 268px;
+	z-index: 1;
+}
+
+#canvas{
+	width: 200px;
+	height: 200px;
+	border-style:solid;
+	border-width:1px;
+	z-index: 2;
+}
+
+#viewer_controls{
+	position: relative;
+	height: 40px;
+	padding: 10px;
+}
+
+	

@@ -1,0 +1,25 @@
+<% if flash[:success] == true %>
+	<% unless @current_action == 'index'%>
+		<% if @current_action == 'show'%>
+			$('#article').html("<%= escape_javascript(render :partial => 'article') %>");
+		<% elsif @current_action == 'edit'%>
+			$('#article').html("<%= escape_javascript(render :partial => 'form') %>");
+		<% else %>
+			clear_form_elements($('#article > form')[0]);
+			$('#articles').html("<%= escape_javascript(render :partial => 'articles') %>");
+		<% end %>
+		main_articles();
+	<% else %>
+		$('#navigation').html("<%= escape_javascript(render :partial => "layouts/menu") %>");
+		$('#navigation a').on('click', function() {
+			ajaxContentRedirect(this.href);
+			return false;
+		});
+		$('#menutd > li > a:first').unbind('click');
+	<% end %>
+<% end %>
+
+$('html, body').animate({scrollTop:0}, 'slow');
+$('#notice').html('<%= flash[:notice].html_safe %>');
+$('#notice').slideDown("fast").delay(2500).fadeOut("slow");
+<% flash[:notice] = nil %>

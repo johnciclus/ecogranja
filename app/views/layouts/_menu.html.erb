@@ -1,0 +1,45 @@
+<ul>
+	<li><%= section_link("Aprendizaje", :controller=>"home", :action=>"learning")%>
+		<ul id="menuapr">
+			<li><%= section_link("Agropedia", 	:controller=>"home", 	 :action=>"agropedia")%></li>
+			<li><%= section_link("Artículos", 	:controller=>"articles", :action=>"index")%></li>
+			<li><%= section_link("Cultivos",	:controller=>"crops", 	 :action=>"index")%></li>
+		</ul>		
+	</li>
+	<%if @mode == 'normal' or @mode == 'admin'%>
+		<li><%= section_link("Gestión de Granjas", :controller=>"home", :action=>"farmsadmin")%>
+			<ul id="menuges">
+				<li><%= section_link("Definir Granja", 					:controller=>"farms", 				:action=>"index")%></li>
+				<li><%= section_link("Definir Ambiente", 				:controller=>"environments", 		:action=>"index")%></li>
+				<li><%= section_link("Definir Producción", 				:controller=>"productions", 		:action=>"index")%></li>
+				<li><%= section_link("Definir Mejoramiento del suelo", 	:controller=>"soil_improvements", 	:action=>"index")%></li>
+			</ul>		
+		</li>
+		<li><%= section_link("Toma de decisiones", :controller=>"home", :action=>"decisionmaking")%>
+			<ul id="menutd">
+				
+				<li><%= section_link("Simular producción", :controller=>"simulations", :action=>"index")%></li>
+				<li><%= section_link("Simulaciones almacenadas", :controller=>"records", :action=>"index")%></li>
+				<li><%= section_link("Escenarios productivos", 	:controller=>"scenarios", 			:action=>"index")%></li>
+			</ul>		
+		</li>
+	<% end %>
+	<% if @mode == 'admin' %>
+		<li><%= section_link("Administración", :controller=>"home", :action=>"administration")%>
+			<ul id="menuadm">
+				<li><%= section_link("Gestión de usuarios", 	:controller => "users", 		:action =>"index")%></li>
+				<li><%= section_link("Gestión de perfiles", 	:controller => "profiles", 		:action =>"index")%></li>
+				<li><%= section_link("Gestión de cultivos",		:controller => "crops", 		:action =>"admin")%></li>
+				<li><%= section_link("Gestión de articulos", 	:controller => "articles", 		:action =>"admin")%></li>
+				<li><%= section_link("Gestión de categorias", 	:controller => "categories", 	:action =>"index")%></li>
+				<li><%= section_link("Gestión de granjas",		:controller => "farms", 		:action =>"index")%></li>
+				<li><%= section_link("Gestión de coordenadas",	:controller => "coordinates", 	:action =>"index")%></li>
+				<li><%= section_link("Gestión de produciones",	:controller => "productions", 	:action =>"index")%></li>
+				<li><%= section_link("Gestión de ambiente",		:controller => "environments", 	:action =>"index")%></li>
+				<li><%= section_link("Gestión de mejoramiento de suelos",		:controller => "soil_improvements", 	:action =>"index")%></li>
+				<li><%= section_link("Gestión de escenarios",	:controller => "scenarios", 	:action =>"index")%></li>
+				
+			</ul>		
+		</li>
+	<%end%>
+</ul>

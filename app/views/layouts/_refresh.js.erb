@@ -1,0 +1,16 @@
+$('#login').html("<%= escape_javascript(render :partial => "layouts/login") %>");
+
+$('#navigation').html("<%= escape_javascript(render :partial => "layouts/menu") %>");
+$('#navigation a, #login a').unbind('click');
+$('#navigation a, #login a').click(function() {
+	ajaxContentRedirect(this.href);
+	return false;
+});
+$('#menutd > li > a:first').unbind('click');
+
+ajaxContentRedirect('/');
+$('#menutd > li > a:first').unbind('click');
+
+$('#notice').html('<%= flash[:notice].html_safe %>');
+$('#notice').slideDown("fast").delay(2500).fadeOut("slow");
+<% flash[:notice] = nil %>

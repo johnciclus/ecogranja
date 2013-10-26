@@ -1,0 +1,9 @@
+<% unless @article.nil? %>
+	<br/>
+	<h2><%= @article.title %></h2>
+	<br/>
+	<div>
+		<%= @article.content.html_safe %>
+	</div>
+	<br/>
+<% end %>

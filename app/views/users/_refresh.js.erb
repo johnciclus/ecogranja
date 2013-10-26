@@ -1,0 +1,30 @@
+<% if flash[:success] == true %>
+	function render_users(){
+	<% if @current_action == 'edit'%>
+		$('#user').html("<%= escape_javascript(render :partial => 'form') %>");
+	<% else %>
+		clear_form_elements($('#user > form')[0]);
+		<% if @mode == 'admin' %>
+			$('#users').html("<%= escape_javascript(render :partial => 'users') %>");
+		<% end %>
+	<% end %>
+		main_users();
+	}
+	if ($('#user').length == 0){
+		ajaxContentRedirect('/users', render_users);
+	}else{
+		render_users()
+	}
+	$('#navigation').html("<%= escape_javascript(render :partial => "layouts/menu") %>");
+	$('#navigation a').on('click', function() {
+		ajaxContentRedirect(this.href);
+		return false;
+	});
+	$('#menutd > li > a:first').unbind('click');
+<% end %>
+
+
+$('html, body').animate({scrollTop:0}, 'slow');
+$('#notice').html('<%= flash[:notice].html_safe %>');
+$('#notice').slideDown("fast").delay(2500).fadeOut("slow");
+<% flash[:notice] = nil %>

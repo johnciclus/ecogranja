@@ -1,0 +1,144 @@
+<% unless @mode == 'public' %>
+	<% if @farm.errors.any? %>
+		<div id="error_explanation">
+			<h2> <%= pluralize(@farm.errors.count, "error")%>, posibles causas:</h2>
+			<ul>
+				<% @farm.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>		
+			</ul>	
+		</div>
+	<% end %>
+	
+	<h3><span></span>Granja</h3>
+	<br/>
+	<div id="farm">	
+		<%= render :partial => "form" %>
+	</div>
+
+	<div class="separator"></div>
+	
+	<h3><span></span> Listado de granjas</h3>
+	<br/>
+	<div id="farms">	
+		<%= render :partial => "farms" %>
+	</div>
+<% end %>
+
+<div class="cleaner"></div>
+
+<% unless @mode == 'public' %>
+	<script src="http://maps.google.com/maps/api/js?sensor=false&callback=isNaN"
+	  type="text/javascript">
+	</script>
+	
+	<script type="text/javascript">
+		
+		window.google = window.google || {};
+		google.maps = google.maps || {};
+		
+		function complete_jquery_data_tables_farms(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['jquery_data_tables']	=true;
+				ready_jquery_data_tables('tablaGranjas');
+			}
+		};	
+		
+		function complete_poo(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['poo']		=true;
+				ready_poo();
+			}
+		};
+		
+		function ready_poo(){
+			if(!libraries['viewer']){
+				$.getScript("/assets/visualizador/viewer.js", complete_viewer);
+			}
+			else{
+				ready_viewer();
+			}
+		};
+		
+		function complete_viewer(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['viewer']		=true;
+				ready_viewer();
+			}
+		};
+		
+		function ready_viewer(){
+			if(!libraries['google_maps']){
+				loadGoogleMaps();
+			}
+			else{
+				initializeMap();
+			}
+		};
+		
+		function loadGoogleMaps() {
+		  (function() {
+			  function getScript(src) {
+			    var s = document.createElement('script');
+			    s.src = src;
+			    document.body.appendChild(s);
+			  };
+		  })();
+		  libraries['google_maps'] = true;
+		  initializeMap();
+		  ready_google_maps();
+		};
+		
+		function ready_google_maps(){
+			$("#setGeoData").click(function() {
+	        	setCoordinates({area:	 	'farm_area',
+	        					loc_lat: 	'farm_loc_lat', 
+	        					loc_lng: 	'farm_loc_lng', 
+	        					loc_alt: 	'farm_loc_alt',
+	        					avg_slope:	'farm_avg_slope',
+	        					coord:		'farm_coordinates_attributes',
+	        					coord_count: locations.length });
+	        	return false;
+	   		});
+		};
+		
+		function main_farms(){
+			if(!libraries['jquery_ui']){
+				$.getScript("/assets/jquery/jquery-ui-1.8.23.custom.min.js", complete_jquery_ui);
+			}
+			else{
+				ready_jquery_ui();
+			}
+			if(!libraries['jquery_data_tables']){
+				$.getScript("/assets/jquery/jquery.dataTables.min.js", complete_jquery_data_tables_farms);
+			}
+			else{
+				ready_jquery_data_tables('tablaGranjas');
+			}
+			if(!libraries['jquery_tools']){
+				$.getScript("/assets/jquery/jquery.tools.min.js", complete_jquery_tools);
+			}
+			else{
+				ready_jquery_tools();
+			}
+			if(!libraries['google_maps']){
+				if(!libraries['poo']){
+					$.getScript("/assets/poo.js", complete_poo);
+				}
+				else{
+					ready_poo();
+				}
+			}
+			else{
+				initializeMap();
+			}
+		};
+		
+		$(document).ready(function () {
+			if(!libraries['google_maps']){
+				main_farms();
+				<%= render :file => "farms/_refresh.js.erb" %>
+			}
+		});
+	</script> 
+<% end %>

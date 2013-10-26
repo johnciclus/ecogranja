@@ -1,0 +1,16 @@
+<% if flash[:success] == true %>
+	<% if @current_action == 'index'%>
+		$('#navigation').html("<%= escape_javascript(render :partial => "layouts/menu") %>");
+		$('#navigation a').unbind('click');
+		$('#navigation a').click(function() {
+			ajaxContentRedirect(this.href);
+			return false;
+		});
+		$('#menutd > li > a:first').unbind('click');
+	<% end %>	
+<% end %>
+
+$('html, body').animate({scrollTop:0}, 'slow');
+$('#notice').html('<%= flash[:notice].html_safe %>');
+$('#notice').slideDown("fast").delay(2500).fadeOut("slow");
+<% flash[:notice] = nil %>

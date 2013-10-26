@@ -1,0 +1,48 @@
+<%= form_for(@coordinate) do |f| %>
+  <% if @coordinate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coordinate.errors.count, "error") %>, posibles causas:</h2>
+ 
+      <ul>
+	      <% @coordinate.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :farm_id, "Granja"%><br />
+    <%= f.select :farm_id, @farms.collect {|c| [c.name, c.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :ind, "Índice"%><br />
+    <%= f.text_field :ind %>
+  </div>
+  <div class="field">
+    <%= f.label :lat, "Latitud"%><br />
+    <%= f.text_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :lng, "Longitud"%><br />
+    <%= f.text_field :lng %>
+  </div>
+  <div class="field">
+    <%= f.label :alt, "Altitud"%><br />
+    <%= f.text_field :alt %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Guardar articulo" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    	$("form").bind("keypress", function(e) {
+            if (e.keyCode == 13) return false;
+      	});
+        $(".field label").addClass("ui-state-default ui-corner-all");
+        $(".field input").addClass("ui-widget-content");
+        $("input[type=submit]").button();
+    });
+</script> 

@@ -1,0 +1,115 @@
+<% unless @crop.nil? %>
+	<table id="tablaCultivo">
+	<thead>
+	<tr>
+		</tr>
+			<th>Propiedad</th>
+			<th>Valor</th>
+		<tr>
+	  
+	</tr>
+	</thead>
+	<tbody>	
+		<tr>
+		  	  <td><b>Articulo</b></td>
+			  <td><b><%= @crop.article.title %></b></td>
+		</tr>
+		<tr>
+			  <td><b>Nombre del cultivo</b></td>
+			  <td>	 <%= @crop.name %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Descripción del cultivo</b></td>
+			  <td>	 <%= @crop.description %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Nitrogeno absorbido</b></td>
+			  <td>	 <%= @crop.NabsorPro %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Fósforo absorbido</b></td>
+			  <td>	 <%= @crop.PAbsorPro %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Potasio absorbido</b></td>
+			  <td>	 <%= @crop.KAbsorPro %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Nitrógeno extraido</b></td>
+			  <td>	 <%= @crop.NExtraPro %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Fósforo extraido</b></td>
+			  <td>	 <%= @crop.PExtraPro %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Potasio extraido</b></td>
+			  <td>	 <%= @crop.KExtraPro %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Promedio Ph </b></td>
+			  <td>	 <%= @crop.ProPhPlantas %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Desviación estandar del Ph</b></td>
+			  <td>	 <%= @crop.DesPhPlantas %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Peso seco de una planta</b></td>
+			  <td>	 <%= @crop.PesoUniCultivo %></td>
+		</tr>
+		<tr>  
+			  <td><b>Desviación estandar del peso seco de una planta</b></td>
+			  <td>	 <%= @crop.DesPesoUniCul %></td>
+		</tr>
+		<tr>  
+			  <td><b>Peso seco de la cosecha</b></td>
+			  <td>	 <%= @crop.PesoUniCosecha %></td>
+		</tr>
+		<tr> 
+			  <td><b>Desviación estandar del peso seco de la cosecha</b></td>
+			  <td>	 <%= @crop.DesPesoUniCos %></td>
+		</tr>
+		<tr>  
+			  <td><b>Tiempo de desarrollo</b></td>
+			  <td>	 <%= @crop.TiemVegetativo %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Tiempo productivo</b></td>
+			  <td>	 <%= @crop.TiemReproductivo %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Luminosidad promedio del cultivo</b></td>
+			  <td>	 <%= @crop.ProLumiPlanta %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Desviación estandar de la Luminosidad</b></td>
+			  <td>	 <%= @crop.DesLumiPlanta %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Precipitacion promedio del cultivo</b></td>
+			  <td>	 <%= @crop.ProPreciPlanta %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Desviación estandar de la precipitacion</b></td>
+			  <td>	 <%= @crop.DesPreciPlanta %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Humedad promedio del cultivo</b></td>
+			  <td>	 <%= @crop.ProHumePlanta %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Desviación estandar de la Humedad</b></td>
+			  <td>	 <%= @crop.DesHumePlanta %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Temperatura promedio del cultivo</b></td>
+			  <td>	 <%= @crop.ProTempPlanta %></td>
+		</tr>
+		<tr>	  
+			  <td><b>Desviación estandar de la Temperatura</b></td>
+			  <td>	 <%= @crop.DesTempPlanta %></td>
+		</tr>
+	</tbody>
+	</table>
+<% end %>

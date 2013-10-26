@@ -1,0 +1,70 @@
+<table id="tablaCultivos">
+<thead>
+<tr>
+  <th>Articulo</th>
+  <th>Nombre del cultivo</th>
+  <th>Descripción del cultivo</th>
+  <th>Nitrogeno absorbido</th>
+  <th>Fósforo absorbido</th>
+  <th>Potasio absorbido</th>
+  <th>Nitrógeno extraido</th>
+  <th>Fósforo extraido</th>
+  <th>Potasio extraido</th>
+  <th>Promedio Ph </th>
+  <th>Desviación estandar del Ph</th>
+  <th>Peso seco de una planta</th>
+  <th>Desviación estandar del peso seco de una planta</th>
+  <th>Peso seco de la cosecha</th>
+  <th>Desviación estandar del peso seco de la cosecha</th>
+  <th>Tiempo de desarrollo</th>
+  <th>Tiempo productivo</th>
+  <th>Luminosidad promedio del cultivo</th>
+  <th>Desviación estandar de la Luminosidad</th>
+  <th>Precipitacion promedio del cultivo</th>
+  <th>Desviación estandar de la precipitacion</th>
+  <th>Humedad promedio del cultivo</th>
+  <th>Desviación estandar de la Humedad</th>
+  <th>Temperatura promedio del cultivo</th>
+  <th>Desviación estandar de la Temperatura</th>
+  <th>Editar</th>
+  <th>Eliminar</th>
+</tr>
+</thead>
+<tbody>	
+	<% @crops.each do |crop| %>
+	<tr>
+	  <td><b><%= crop.article.title %></b></td>
+	  <td>	 <%= crop.name %></td>
+	  <td>	 <%= crop.description %></td>
+	  <td>	 <%= crop.NabsorPro %></td>
+	  <td>	 <%= crop.PAbsorPro %></td>
+	  <td>	 <%= crop.KAbsorPro %></td>
+	  <td>	 <%= crop.NExtraPro %></td>
+	  <td>	 <%= crop.PExtraPro %></td>
+	  <td>	 <%= crop.KExtraPro %></td>
+	  <td>	 <%= crop.ProPhPlantas %></td>
+	  <td>	 <%= crop.DesPhPlantas %></td>
+	  <td>	 <%= crop.PesoUniCultivo %></td>
+	  <td>	 <%= crop.DesPesoUniCul %></td>
+	  <td>	 <%= crop.PesoUniCosecha %></td>
+	  <td>	 <%= crop.DesPesoUniCos %></td>
+	  <td>	 <%= crop.TiemVegetativo %></td>
+	  <td>	 <%= crop.TiemReproductivo %></td>
+	  <td>	 <%= crop.ProLumiPlanta %></td>
+	  <td>	 <%= crop.DesLumiPlanta %></td>
+	  <td>	 <%= crop.ProPreciPlanta %></td>
+	  <td>	 <%= crop.DesPreciPlanta %></td>
+	  <td>	 <%= crop.ProHumePlanta %></td>
+	  <td>	 <%= crop.DesHumePlanta %></td>
+	  <td>	 <%= crop.ProTempPlanta %></td>
+	  <td>	 <%= crop.DesTempPlanta %></td>
+	  <td><%= link_to 'Editar', edit_crop_path(crop), :method => "get", :remote => true, :class => "button" %></td>
+	  <td><%= button_to "Eliminar", crop, :method => :delete, :remote => true, :class => "button" %></td>
+	  
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<br />
+<%= link_to 'Nuevo cultivo', { :controller => "crops", :action => "index"}, :class => "button" %>

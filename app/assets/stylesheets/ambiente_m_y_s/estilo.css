@@ -1,0 +1,24 @@
+
+#layer{
+	 
+}
+#codigo{
+	height:400px;
+	overflow-y:scroll;
+}
+#contVisualizador{
+	margin: 0 auto 10px auto;
+	width: 83%;
+	height: 420px;
+	min-width: 400px; 
+	float: right;
+	overflow:auto;
+}
+#visualizador{
+	height: 400px;
+	min-width: 400px;
+}
+#control_temp{
+	margin: 10px auto;
+	width: 400px;
+}

@@ -1,0 +1,63 @@
+<% if @profile.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@profile.errors.count, "error") %>, posibles causas:</h2>
+		
+		<ul>
+			<% @profile.errors.full_messages.each do |msg| %>
+		    	<li><%= msg %></li>
+			<% end %>
+	  	</ul>
+	</div>
+<% end %>
+
+<h3><span></span> Perfil </h3>
+<br/>
+<div id="profile">
+	<%= render 'form' %>
+</div>
+
+<div class="separator"></div>
+
+<h3><span></span> Listado de perfiles </h3>
+<br/>
+<div id="profiles">	
+	<%= render :partial => "profiles" %>
+</div>
+
+<div class="cleaner"></div>
+
+<script type="text/javascript">	
+	function complete_jquery_data_tables_profiles(data, textStatus, jqxhr){
+		if(textStatus == 'success'){
+			libraries['jquery_data_tables']	=true;
+			ready_jquery_data_tables('tablaPerfiles');
+		}
+	};
+	function main_profiles(){
+		if(!libraries['jquery_ui']){
+			$.getScript("/assets/jquery/jquery-ui-1.8.23.custom.min.js", complete_jquery_ui);
+		}
+		else{
+			ready_jquery_ui();
+		}
+		if(!libraries['jquery_tools']){
+			$.getScript("/assets/jquery/jquery.tools.min.js", complete_jquery_tools);
+		}
+		else{
+			ready_jquery_tools();
+		}
+		if(!libraries['jquery_data_tables']){
+			$.getScript("/assets/jquery/jquery.dataTables.min.js", complete_jquery_data_tables_profiles);
+		}
+		else{
+			ready_jquery_data_tables('tablaPerfiles');
+		}
+		
+	};
+	
+	$(document).ready(function () {
+		main_profiles();
+		<%= render :file => "profiles/_refresh.js.erb" %>
+	});
+	
+</script>

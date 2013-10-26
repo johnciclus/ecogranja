@@ -1,0 +1,151 @@
+<% unless @mode == 'public' %>
+	<h3><span></span> Interfaz web de Simulación</h2>
+	<br />
+	<div id="simulation">
+		<div id="control_simulations">
+			<div id="accordion">
+				<div>
+					<h2><a href="#">Parametros</a></h2>
+					<div id='divParametros' class='control_cont'></div>
+				</div>
+				<div>
+					<h2><a href="#">Auxiliares</a></h2>
+					<div id='divAuxiliares'  class='control_cont'></div>
+				</div>
+				<div>
+					<h2><a href="#">Niveles</a></h2>
+					<div id='divNiveles'  class='control_cont'></div>
+				</div>
+				<div>
+					<h2><a href="#">Flujos</a></h2>
+					<div id='divFlujos'  class='control_cont'></div>
+				</div>
+				<div>
+					<h2><a href="#">Multiplicadores</a></h2>
+					<div id='divMultiplicadores'  class='control_cont'></div>
+				</div>
+			</div>
+			<!--<div id="codigo">
+				
+			</div>-->
+		</div>
+		<div id="cont_simulations" >
+			<div id="viewer_simulations_container">
+				<div id="viewer_simulations">
+				
+				</div>
+			</div>
+			<div id="control_temporal">
+					<fieldset>
+						<legend>Control temporal</legend>
+						
+						<div class="cell">
+							<label for='ti'>Tiempo inicial:</label><br />
+							<input id='ti' type='text' title='Tiempo inicial de la simulación'>
+					    </div>
+						<div class="cell">
+							<label for='tf'>Tiempo final:</label><br />
+							<input id='tf' type='text' title='Tiempo final de la simulación'>
+					    </div>
+					    <div class="cell">
+							<label for='dt'>Paso simulaci&oacute;n:</label><br />
+							<input id='dt' type='text' title='Lapso de cada iteración durante la simulación' >
+					    </div>
+					</fieldset>
+			</div>		
+		</div>
+	</div>
+	<div id="scenarios">	
+		<%= render :partial => "scenarios/scenarios" %>
+	</div>
+<% end %>
+
+<div class="cleaner"></div>
+
+<% unless @mode == 'public' %>
+	<script type="text/javascript">	
+		function complete_jquery_data_tables_simulations(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['jquery_data_tables']	=true;
+				ready_jquery_data_tables('tablaEscenarios');
+			}
+		};
+		function complete_highcharts(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['highcharts'] 		=true;
+				ready_highcharts();
+			}
+		};
+		function ready_highcharts(){
+			if(!libraries['sys_dyn_simulator']){
+				$.getScript("/assets/sys_dyn_simulator/sys_dyn_simulator.js", complete_sys_dyn_simulator);
+			}
+			else{
+				ready_sys_dyn_simulator();
+			}
+		};
+		function complete_sys_dyn_simulator(data, textStatus, jqxhr){
+			if(textStatus == 'success'){
+				libraries['sys_dyn_simulator'] 		=true;
+				ready_sys_dyn_simulator();
+			}
+		};
+		function ready_sys_dyn_simulator(){
+			var divs = {parametros: 	 '#divParametros', 
+						auxiliares: 	 '#divAuxiliares',
+						niveles:		 '#divNiveles',
+						flujos:			 '#divFlujos',
+						multiplicadores: '#divMultiplicadores',
+						accordion:		 '#accordion'};
+			
+			var controls = {	ti: '#ti',
+								tf: '#tf',
+								dt: '#dt'
+											};
+			var viewer = 'viewer_simulations';
+			sysDyn.reset();
+			sysDyn.load('/modelo_agricola.xml', viewer, divs, controls);
+		};
+		
+		function main_simulations(){
+			if(!libraries['jquery_ui']){
+				$.getScript("/assets/jquery/jquery-ui-1.8.23.custom.min.js", complete_jquery_ui);
+			}
+			else{
+				ready_jquery_ui();
+			}
+			if(!libraries['jquery_tools']){
+				$.getScript("/assets/jquery/jquery.tools.min.js", complete_jquery_tools);
+			}
+			else{
+				ready_jquery_tools();
+			}
+			if(!libraries['jquery_data_tables']){
+				$.getScript("/assets/jquery/jquery.dataTables.min.js", complete_jquery_data_tables_simulations);
+			}
+			else{
+				ready_jquery_data_tables('tablaEscenarios');
+			}
+			if(!libraries['highcharts']){
+				$.getScript("/assets/highcharts.js", complete_highcharts);
+			}
+			else{
+				ready_highcharts();
+			}
+		};
+		
+		$(document).ready(function () {
+			main_simulations();
+			<%= render :file => "simulations/_refresh.js.erb" %>
+		});
+	</script> 
+<% end %>
+
+<!--<%= stylesheet_link_tag    "ambiente_m_y_s/ui.spinner", :media => "all" %>-->
+<!--<%= stylesheet_link_tag    "ambiente_m_y_s/highlight", :media => "all" %>-->
+<!--<%= stylesheet_link_tag    "ambiente_m_y_s/estilo", :media => "all" %>-->
+<!--<%= javascript_include_tag "ambiente_m_y_s/ui.spinner"%>-->
+<!--<%= javascript_include_tag "ambiente_m_y_s/highlight"%>-->
+<!--<%= javascript_include_tag "ambiente_m_y_s/highcharts"%>-->
+<!--<%= javascript_include_tag "ambiente_m_y_s/exporting"%>-->
+<!--<%= javascript_include_tag "ambiente_m_y_s/main"%>-->

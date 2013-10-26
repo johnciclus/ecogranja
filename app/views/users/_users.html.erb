@@ -1,0 +1,42 @@
+<table id="tablaUsuarios">	
+<thead>
+<tr>
+  <th>Nombre</th>
+  <th>Correo electronico</th>
+  <th>Perfil</th>
+  <th>Ocupación</th>
+  <th>Organización</th>
+  <th>Ciudad</th>
+  <th>Departamento / Estado</th>
+  <th>País</th>
+  <% if @mode == 'admin' %>
+	  <th>Editar</th>
+	  <th>Eliminar</th>
+  <% end %>
+</tr>
+</thead>
+<tbody>
+	<% @users.each do |user| %>
+	<tr>
+	  <td><b><%= user.username %></b></td>
+	  <td>	 <%= user.email %></td>
+	  <td>	 <%= user.profile.name %></td>
+	  <td>	 <%= user.occupation %></td>
+	  <td>	 <%= user.organization %></td>
+	  <td>	 <%= user.city %></td>
+	  <td>	 <%= user.state %></td>
+	  <td>	 <%= user.country %></td>
+
+	  <% if @mode == 'admin' %>
+		  <td><%= button_to 'Editar', 	edit_user_path(user), :method => "get", :remote => true, :class => "button" %></td>
+		  <td><%= button_to "Eliminar", user, :method => :delete, :remote => true, :class => "button" %></td>
+	  <% end %>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+ 
+<br />
+<% if @mode = 'admin' %>
+	<%= link_to 'Nuevo Usuario', { :controller => "users", :action => "index"}, :class => "button" %>
+<% end %>

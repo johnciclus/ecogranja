@@ -1,0 +1,23 @@
+<% if flash[:success] == true %>
+	<% unless @current_action == 'index'%>
+		<% if @current_action == 'edit'%>
+			$('#farm').html("<%= escape_javascript(render :partial => 'form') %>");
+		<% elsif @current_action == 'update' %>
+			clear_form_elements($('#farm > form')[0]);
+			$('#farms').html("<%= escape_javascript(render :partial => 'farms') %>");
+		<% end %>
+			main_farms();
+	<% else %>
+		$('#navigation').html("<%= escape_javascript(render :partial => "layouts/menu") %>");
+		$('#navigation a').on('click', function() {
+			ajaxContentRedirect(this.href);
+			return false;
+		});
+		$('#menutd > li > a:first').unbind('click');
+	<% end %>
+<% end %>
+
+$('html, body').animate({scrollTop:0}, 'slow');
+$('#notice').html('<%= flash[:notice].html_safe %>');
+$('#notice').slideDown("fast").delay(2500).fadeOut("slow");
+<% flash[:notice] = nil %>

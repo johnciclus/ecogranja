@@ -1,0 +1,34 @@
+<table id="tablaEscenarios">
+<thead>
+<tr>
+  <th>Nombre del escenario</th>
+  <th>Descripción del escenario</th>
+  <th>Granja</th>
+  <th>Ambiente</th>
+  <th>Producción</th>
+  <th>Mejoramiento del suelo</th>
+  <th>Cultivo</th>
+  <th>Editar</th>
+  <th>Eliminar</th>
+</tr>
+</thead>
+<tbody>	
+	<% @scenarios.each do |scenario| %>
+	<tr>
+	  <td><b> <%= scenario.name 					%></b></td>
+	  <td>	  <%= scenario.description 				%></td>
+	  <td>	  <%= scenario.farm.name 				%></td>
+	  <td>	  <%= scenario.environment.name 		%></td>
+	  <td>	  <%= scenario.production.name 			%></td>
+	  <td>	  <%= scenario.soil_improvement.name	%></td>
+	  <td>	  <%= scenario.crop.name 				%></td>
+	  <td>	  <%= link_to 'Editar', edit_scenario_path(scenario), :method => "get", :remote => true, :class => "button" %></td>
+	  <td>	  <%= button_to "Eliminar", scenario, :method => :delete, :remote => true, :class => "button" %></td>
+	  
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<br />
+<%= link_to 'Nuevo Escenario', { :controller => "scenarios", :action => "index"}, :class => "button" %>

@@ -1,0 +1,29 @@
+<table id="tablaProducciones">
+<thead>
+<tr>
+  <th>Granja</th>
+  <th>Nombre de la producción</th>
+  <th>Area de cultivo</th>
+  <th>Distancia horizontal</th>
+  <th>Distancia vertical</th>
+  <th>Editar</th>
+  <th>Eliminar</th>
+</tr>
+</thead>
+<tbody>	
+	<% @productions.each do |production| %>
+	<tr>
+	  <td><b><%= production.farm.name %></b></td>
+	  <td>	 <%= production.name %></td>
+	  <td>	 <%= production.AreaCultivo %></td>
+	  <td>	 <%= production.DistHorizontal %></td>
+	  <td>	 <%= production.DistVertical %></td>
+	  <td><%= link_to 'Editar', edit_production_path(production), :method => "get", :remote => true, :class => "button" %></td>
+	  <td><%= button_to "Eliminar", production, :method => :delete, :remote => true,  :class => "button" %></td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+
+<br />
+<%= link_to 'Nueva Producción', { :controller => "productions", :action => "index"}, :class => "button" %>
